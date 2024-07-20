@@ -25,7 +25,7 @@ O desenvolvimento se deu por meio de Pair programming, onde implementamos as reg
 
 ### Desenho de Arquitetura
 
-![Arquitetura]()
+![Arquitetura](https://github.com/denilsonos/hackathon-medical-scheduler/blob/feature/adjust-readme/.github/images/arquitetura.png)
 
 ## Deploy
 
@@ -54,17 +54,7 @@ Para execução via docker
 
 ## Ordem de execução
 
-Para a execução indicamos criar um item e um pedido afim de ter massas de teste. Estes endpoints estão descritos dentro do arquivo Postman:
-
-1 - Criar item:
-```
-    Postman -> Order -> Create
-```
-
-2 - Criar Pedido:
-```
-    Postman -> Items -> Create
-```
+Pendente
 
 ## Swagger
 
