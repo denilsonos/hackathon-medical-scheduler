@@ -1,10 +1,10 @@
-# tech-challenge-orders-project
+# hackathon-medical-scheduler
 
-Project Tech Challenge Group 62
+Project Hackaton Medical Scheduler - Group 62
 
 ## Descrição
 
-Este projeto contempla um sistema para gerenciamento de pedidos e estoque.
+Este projeto contempla um sistema para gerenciamento de agendas e consultas.
 ## Tecnologia
 
 TypeScript: 5.2.2
@@ -14,19 +14,18 @@ Node: 20.2.1
 ![Linkedin: HelioSoares](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
 
-
-
 ## Desenvolvimento
 
-O desenvolvimento se deu por meio de Pair programming, onde os atores e ouvintes definidos([documentação de base](https://docs.google.com/document/d/1T5h---6pFPUxed4JcuHohJVm-L-NUCaBk-LMAonPDmI/edit?usp=sharing)), implementaram e testaram os cenários encontrados no Tech challenge.
+O desenvolvimento se deu por meio de Pair programming, onde implementamos as regras descritas no seguinte [documento](https://discord.com/channels/1065992165232214066/1113194119825735750/1262551294695047298).
+
 ## Arquitetura
 
 ### Video explicativo
-[Video explicativo](https://www.youtube.com/watch?v=K4NC3BxVi8o)
+[Video explicativo](https://pendente.com)
 
 ### Desenho de Arquitetura
 
-![Arquitetura](https://github.com/denilsonos/tech-challenge-orders-project/blob/main/.github/images/arquitetura.png)
+![Arquitetura]()
 
 ## Deploy
 
@@ -72,5 +71,5 @@ Para a execução indicamos criar um item e um pedido afim de ter massas de test
 http://localhost:3000/docs
 ## Postman
 
-[Collection para teste](https://github.com/denilsonos/tech-challenge-orders-project/blob/main/Tech%20Challenge%20Collection.postman_collection.json)
+[Collection para teste]()
 
