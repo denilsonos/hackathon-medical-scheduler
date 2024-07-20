@@ -1,11 +1,9 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { ClientDAO } from '../../base/dao/client'
 import { OrmAdapter } from '../../adapters/gateways/orm-adapter'
-import { OrderDAO } from '../../base/dao/order'
-import { ItemDAO } from '../../base/dao/item'
-import { PaymentDAO } from '../../base/dao/payment'
-import { FakeQueue } from '../../adapters/external-services/fake-queue-service/fake-queue-service-adapter'
+import { Doctor } from '../../core/entities/doctor'
+import { Patient } from '../../core/entities/patient'
+import { Appointment } from '../../core/entities/appointment'
 
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = process.env
@@ -50,11 +48,9 @@ export class MysqlOrmAdapter implements OrmAdapter {
       synchronize: true,
       logging: false,
       entities: [
-        OrderDAO,
-        ItemDAO,
-        ClientDAO,
-        PaymentDAO,
-        FakeQueue
+        Doctor,
+        Patient,
+        Appointment
       ],
       migrations: [],
       subscribers: [],
