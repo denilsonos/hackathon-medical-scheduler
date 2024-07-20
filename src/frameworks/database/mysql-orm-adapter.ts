@@ -1,10 +1,9 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 import { OrmAdapter } from '../../adapters/gateways/orm-adapter'
-import { Doctor } from '../../core/entities/doctor'
-import { Patient } from '../../core/entities/patient'
-import { Appointment } from '../../core/entities/appointment'
-
+import { Doctor } from '../../base/dao/doctor'
+import { Patient } from '../../base/dao/patient'
+import { Appointment } from '../../base/dao/appointment'
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = process.env
 
@@ -47,11 +46,7 @@ export class MysqlOrmAdapter implements OrmAdapter {
       database: DB_NAME,
       synchronize: true,
       logging: false,
-      entities: [
-        Doctor,
-        Patient,
-        Appointment
-      ],
+      entities: [Doctor, Patient, Appointment],
       migrations: [],
       subscribers: [],
     })
