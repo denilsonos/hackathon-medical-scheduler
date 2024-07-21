@@ -9,7 +9,7 @@
    "scripts": {
       "test": "jest",
       "lint": "eslint src --ext .ts --fix",
-      "dev": "ts-node src/main.ts",
+      "dev": "ts-node-dev src/main.ts",
       "start": "ts-node src/main.ts"
    },
    "devDependencies": {

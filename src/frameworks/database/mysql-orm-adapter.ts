@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 import { OrmAdapter } from '../../adapters/gateways/orm-adapter'
-import { Doctor } from '../../base/dao/doctor'
+import { DoctorDAO } from '../../base/dao/doctor'
 import { Patient } from '../../base/dao/patient'
 import { Appointment } from '../../base/dao/appointment'
 
@@ -46,7 +46,7 @@ export class MysqlOrmAdapter implements OrmAdapter {
       database: DB_NAME,
       synchronize: true,
       logging: false,
-      entities: [Doctor, Patient, Appointment],
+      entities: [DoctorDAO, Patient, Appointment],
       migrations: [],
       subscribers: [],
     })

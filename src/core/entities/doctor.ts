@@ -1,5 +1,5 @@
-export class DoctorDTO {
-  public id?: number
+export class DoctorEntity {
+  public id: number
   public name: string
   public crm: string
   public specialty: string
@@ -12,13 +12,13 @@ export class DoctorDTO {
     specialty: string,
     rating: number,
     availability: { day: string; times: string[] }[],
-    id?: number,
+    id: number,
   ) {
+    this.id = id
     this.name = name
     this.crm = crm
     this.specialty = specialty
     this.rating = rating
     this.availability = availability
-    this.id = id
   }
 }

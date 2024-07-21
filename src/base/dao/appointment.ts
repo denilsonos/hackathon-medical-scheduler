@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
-import { Doctor } from './doctor'
+import { DoctorDAO as Doctor } from './doctor'
 import { Patient } from './patient'
 
 @Entity()
