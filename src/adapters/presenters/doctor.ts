@@ -12,4 +12,10 @@ export class DoctorPresenter {
       doctorEntity.id,
     )
   }
+
+  static EntitiesToDtos(doctorEntities: DoctorEntity[]): DoctorDTO[] {
+    return doctorEntities.map((doctor: DoctorEntity) =>
+      DoctorPresenter.EntityToDto(doctor),
+    )
+  }
 }
