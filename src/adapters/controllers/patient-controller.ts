@@ -1,4 +1,8 @@
-import { Patient, IParams } from '../gateways/interfaces/patient'
+import {
+  IFindDoctorsByFilterParams,
+  IMakeAnAppointmentParams,
+  Patient,
+} from '../gateways/interfaces/patient'
 import { DoctorDTO } from '../../base/dto/doctor'
 import { DoctorUseCase } from '../gateways/use-cases/doctor-use-case'
 import { DoctorRepository } from '../gateways/repositories/doctor-repository'
@@ -17,7 +21,9 @@ export class PatientController implements Patient {
     this.doctorUseCase = new DoctorUseCaseImpl(this.doctorRepository)
   }
 
-  async findDoctorsByFilter(params: IParams): Promise<DoctorDTO[]> {
+  async findDoctorsByFilter(
+    params: IFindDoctorsByFilterParams,
+  ): Promise<DoctorDTO[]> {
     const doctors = await this.doctorUseCase.findByFilter(
       params?.name,
       params?.crm,
@@ -27,5 +33,9 @@ export class PatientController implements Patient {
     return doctors.map((doctor: DoctorEntity) =>
       DoctorPresenter.EntityToDto(doctor),
     )
+  }
+
+  async makeAnAppointment(params: IMakeAnAppointmentParams): Promise<void> {
+    console.log(params)
   }
 }

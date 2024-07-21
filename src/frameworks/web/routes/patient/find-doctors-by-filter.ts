@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { Exception } from '../../../../core/entities/exceptions'
 import { findAllByFilterSwagger } from '../../swagger'
 import { DbConnectionImpl } from '../../../database/db-connection-impl'
-import { IParams } from '../../../../adapters/gateways/interfaces/patient'
+import { IFindDoctorsByFilterParams } from '../../../../adapters/gateways/interfaces/patient'
 import { PatientController } from '../../../../adapters/controllers/patient-controller'
 
 export const findDoctorsByFilterRoute = async (fastify: FastifyInstance) => {
@@ -14,7 +14,7 @@ export const findDoctorsByFilterRoute = async (fastify: FastifyInstance) => {
       const controller = new PatientController(dbConn)
 
       await controller
-        .findDoctorsByFilter(request.query as IParams)
+        .findDoctorsByFilter(request.query as IFindDoctorsByFilterParams)
         .then((doctors) => {
           return reply.status(200).send({ doctors })
         })
