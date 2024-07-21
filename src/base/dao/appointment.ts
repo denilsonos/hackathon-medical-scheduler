@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
-import { Doctor } from './doctor'
+import { DoctorDAO } from './doctor'
 import { Patient } from './patient'
 
 @Entity()
@@ -22,8 +22,8 @@ export class Appointment {
   @Column({ type: 'varchar', name: 'cancellationReason', nullable: true })
   public cancellationReason!: string
 
-  @ManyToOne(() => Doctor, (doctor) => doctor.appointments)
-  public doctor!: Doctor
+  @ManyToOne(() => DoctorDAO, (doctor) => doctor.appointments)
+  public doctor!: DoctorDAO
 
   @ManyToOne(() => Patient, (patient) => patient.appointments)
   public patient!: Patient

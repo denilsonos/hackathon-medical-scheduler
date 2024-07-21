@@ -1,8 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Appointment } from './appointment'
+import { DoctorEntity } from '../../core/entities/doctor'
+import { Availability } from '../dto/doctor'
 
-@Entity()
-export class Doctor {
+@Entity('doctor')
+export class DoctorDAO {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   public id!: number
 
@@ -22,5 +24,16 @@ export class Doctor {
   public appointments!: Appointment[]
 
   @Column('simple-json')
-  public availability!: { day: string; times: string[] }[]
+  public availability!: Availability[]
+
+  static daoToEntity(doctor: DoctorDAO): DoctorEntity {
+    return new DoctorEntity(
+      doctor.name,
+      doctor.crm,
+      doctor.specialty,
+      doctor.rating,
+      doctor.availability,
+      doctor.id,
+    )
+  }
 }
