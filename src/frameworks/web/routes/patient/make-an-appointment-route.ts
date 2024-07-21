@@ -1,25 +1,25 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { Exception } from '../../../../core/entities/exceptions'
-import { findAllByFilterSwagger } from '../../swagger'
+import { makeAnAppointmentSwagger } from '../../swagger'
 import { DbConnectionImpl } from '../../../database/db-connection-impl'
-import { IFindDoctorsByFilterParams } from '../../../../adapters/gateways/interfaces/patient'
+import { IMakeAnAppointmentParams } from '../../../../adapters/gateways/interfaces/patient'
 import { PatientController } from '../../../../adapters/controllers/patient-controller'
 
-export const findDoctorsByFilterRoute = async (fastify: FastifyInstance) => {
-  fastify.get(
-    '/patient/doctors',
-    findAllByFilterSwagger(),
+export const makeAnAppointmentRoute = async (fastify: FastifyInstance) => {
+  fastify.post(
+    '/patient/appointments',
+    makeAnAppointmentSwagger(),
     async (request: FastifyRequest, reply: FastifyReply) => {
       const dbConn = new DbConnectionImpl()
       const controller = new PatientController(dbConn)
 
       await controller
-        .findDoctorsByFilter(request.query as IFindDoctorsByFilterParams)
-        .then((doctors) => {
-          return reply.status(200).send({ doctors })
+        .makeAnAppointment(request.body as IMakeAnAppointmentParams)
+        .then((appointment) => {
+          return reply.status(200).send(appointment)
         })
         .catch((error) => {
-          console.error('*** FIND DOCTORS BY FILTER ROUTE ***', error)
+          console.error('*** MAKE AN APPOINTMENT ROUTE ***', error)
           if (error instanceof Exception) {
             return reply.status(error.statusCode).send(error.body)
           }

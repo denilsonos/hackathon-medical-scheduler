@@ -21,7 +21,8 @@ import { updateOrderRoute } from './routes/order/update-order-route'
 import { confirmOrderPaymentRoute } from './routes/payments/confirm-order-payment-route'
 import { createOrderPaymentRoute } from './routes/payments/create-order-payment-route'
 import { getOrderPaymentRoute } from './routes/payments/get-order-payment-route'
-import { findDoctorsByFilterRoute } from './routes/patient/find-doctors-by-filter'
+import { findDoctorsByFilterRoute } from './routes/patient/find-doctors-by-filter-route'
+import { makeAnAppointmentRoute } from './routes/patient/make-an-appointment-route'
 
 export class FastifyAppAdapter implements AppAdapter {
   private readonly app: FastifyInstance
@@ -67,6 +68,7 @@ export class FastifyAppAdapter implements AppAdapter {
 
     // Patients Routes
     this.app.register(findDoctorsByFilterRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/patient/doctors
+    this.app.register(makeAnAppointmentRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/patient/appointments
 
     await this.app
       .listen({ host: this.host, port: this.port })

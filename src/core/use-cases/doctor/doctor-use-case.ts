@@ -27,6 +27,6 @@ export class DoctorUseCaseImpl implements DoctorUseCase {
   ): Promise<DoctorEntity[]> {
     const doctors = await this.doctorRepository.findByFilter(name, crm, rating)
 
-    return doctors.map((doctor: DoctorDAO) => DoctorDAO.daoToEntity(doctor))
+    return DoctorDAO.daosToEntities(doctors)
   }
 }

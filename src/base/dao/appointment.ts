@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
 import { DoctorDAO } from './doctor'
 import { Patient } from './patient'
+import { AppointmentEntity } from '../../core/entities/appointment'
 
 @Entity()
 export class Appointment {
@@ -27,4 +28,21 @@ export class Appointment {
 
   @ManyToOne(() => Patient, (patient) => patient.appointments)
   public patient!: Patient
+
+  static daoToEntity(appointment: Appointment): AppointmentEntity {
+    return new AppointmentEntity(
+      appointment.date,
+      appointment.time,
+      appointment.status,
+      appointment.declineReason,
+      appointment.cancellationReason,
+      appointment.id,
+    )
+  }
+
+  static daosToEntities(appointments: Appointment[]): AppointmentEntity[] {
+    return appointments.map((appointment) =>
+      Appointment.daoToEntity(appointment),
+    )
+  }
 }

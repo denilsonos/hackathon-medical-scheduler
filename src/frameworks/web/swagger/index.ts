@@ -818,28 +818,25 @@ export const findAllByFilterSwagger = () => ({
     },
     response: {
       200: {
-        message: { type: 'string' },
-        doctors: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              id: { type: 'number' },
-              name: { type: 'string' },
-              crm: { type: 'string' },
-              specialty: { type: 'string' },
-              rating: { type: 'number' },
-              availability: {
-                type: 'array',
-                items: {
-                  type: 'object',
-                  properties: {
-                    day: { type: 'string' },
-                    times: {
-                      type: 'array',
-                      items: {
-                        type: 'string',
-                      },
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: { type: 'number' },
+            name: { type: 'string' },
+            crm: { type: 'string' },
+            specialty: { type: 'string' },
+            rating: { type: 'number' },
+            availability: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  day: { type: 'string' },
+                  times: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
                     },
                   },
                 },
@@ -862,6 +859,54 @@ export const findAllByFilterSwagger = () => ({
               },
             },
           },
+        },
+      },
+    },
+  },
+})
+
+export const makeAnAppointmentSwagger = () => ({
+  schema: {
+    tags: ['Appointment'],
+    body: {
+      type: 'object',
+      properties: {
+        doctorId: { type: 'number' },
+        patientEmail: { type: 'string' },
+        date: { type: 'string' },
+        time: { type: 'string' },
+      },
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          id: { type: 'number' },
+          date: { type: 'string' },
+          time: { type: 'string' },
+          status: { type: 'string' },
+        },
+      },
+      400: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+          issues: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                fatal: { type: 'boolean' },
+                message: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
+      409: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
         },
       },
     },

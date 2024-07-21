@@ -36,4 +36,8 @@ export class DoctorDAO {
       doctor.id,
     )
   }
+
+  static daosToEntities(doctors: DoctorDAO[]): DoctorEntity[] {
+    return doctors.map((doctor) => DoctorDAO.daoToEntity(doctor))
+  }
 }
