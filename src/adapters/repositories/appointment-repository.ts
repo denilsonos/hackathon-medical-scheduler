@@ -2,14 +2,28 @@ import { DbConnection } from '../gateways/db/db-connection'
 import {
   AppointmentRepository,
   ICancelParams,
+  IConfirmOrDeclineParams,
   ICreateParams,
   IFindByDateAndTimeParams,
 } from '../gateways/repositories/appointment-repository'
 import { Appointment } from '../../base/dao/appointment'
-import { Not } from 'typeorm'
+import { In, Not } from 'typeorm'
 
 export class AppointmentRepositoryImpl implements AppointmentRepository {
   constructor(private readonly database: DbConnection) {}
+  async confirmOrDecline({
+    appointment,
+    reason,
+    status,
+  }: IConfirmOrDeclineParams): Promise<void> {
+    const repository = this.database.getConnection().getRepository(Appointment)
+
+    appointment.status = status
+    if (reason) appointment.declineReason = reason
+
+    await repository.save(appointment)
+  }
+
   async cancel({ appointment, reason }: ICancelParams): Promise<void> {
     const repository = this.database.getConnection().getRepository(Appointment)
 
@@ -39,7 +53,7 @@ export class AppointmentRepositoryImpl implements AppointmentRepository {
       doctor: { id: doctorId },
       date,
       time,
-      status: status ?? Not('cancelled'),
+      status: status ?? Not(In(['cancelled', 'declined'])),
     })
   }
 

@@ -22,6 +22,12 @@ export interface ICancelParams {
   reason: string
 }
 
+export interface IConfirmOrDeclineParams {
+  appointment: Appointment
+  reason: string
+  status: 'confirmed' | 'declined'
+}
+
 export interface AppointmentRepository {
   create(params: ICreateParams): Promise<Appointment>
   findByDateAndTime(
@@ -29,4 +35,5 @@ export interface AppointmentRepository {
   ): Promise<Appointment | null>
   findById(id: number): Promise<Appointment | null>
   cancel(params: ICancelParams): Promise<void>
+  confirmOrDecline(params: IConfirmOrDeclineParams): Promise<void>
 }

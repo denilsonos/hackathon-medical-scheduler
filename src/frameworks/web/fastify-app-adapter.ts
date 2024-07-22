@@ -24,6 +24,7 @@ import { getOrderPaymentRoute } from './routes/payments/get-order-payment-route'
 import { findDoctorsByFilterRoute } from './routes/patient/find-doctors-by-filter-route'
 import { makeAnAppointmentRoute } from './routes/patient/make-an-appointment-route'
 import { cancelAnAppointmentRoute } from './routes/patient/cancel-an-appointment-route'
+import { confirmOrDeclineAnAppointmentRoute } from './routes/patient/confirm-or-decline-an-appointment-route'
 
 export class FastifyAppAdapter implements AppAdapter {
   private readonly app: FastifyInstance
@@ -66,6 +67,9 @@ export class FastifyAppAdapter implements AppAdapter {
     this.app.register(createClientRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/clients
     this.app.register(getAllRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/client/clients
     this.app.register(getByParamRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/clients/:identifier
+
+    // Doctor Routes
+    this.app.register(confirmOrDeclineAnAppointmentRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/doctor/appointments/:id
 
     // Patients Routes
     this.app.register(findDoctorsByFilterRoute, { prefix: '/api/v1' }) // http://localhost:3000/api/v1/patient/doctors

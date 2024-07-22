@@ -957,3 +957,49 @@ export const cancelAnAppointmentSwagger = () => ({
     },
   },
 })
+
+export const confirmOrDeclineAnAppointmentSwagger = () => ({
+  schema: {
+    tags: ['Appointment'],
+    params: {
+      id: { type: 'string' },
+    },
+    body: {
+      type: 'object',
+      properties: {
+        reason: { type: 'string' },
+        status: { type: 'string' },
+      },
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+        },
+      },
+      400: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+          issues: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                fatal: { type: 'boolean' },
+                message: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
+      409: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+        },
+      },
+    },
+  },
+})
