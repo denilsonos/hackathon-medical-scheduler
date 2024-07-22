@@ -7,8 +7,15 @@ export interface IMakeAnAppointmentParams {
   time: string
 }
 
+export interface ICancelAnAppointmentParams {
+  id: number
+  reason: string
+}
+
 export interface PatientUseCase {
   makeAnAppointment(
     params: IMakeAnAppointmentParams,
   ): Promise<AppointmentEntity>
+
+  cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void>
 }

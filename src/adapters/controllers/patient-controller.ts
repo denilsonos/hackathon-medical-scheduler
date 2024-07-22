@@ -1,4 +1,5 @@
 import {
+  ICancelAnAppointmentParams,
   IFindDoctorsByFilterParams,
   IMakeAnAppointmentParams,
   Patient,
@@ -39,6 +40,26 @@ export class PatientController implements Patient {
       this.doctorRepository,
       this.appointmentRepository,
     )
+  }
+
+  async cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void> {
+    const schema = z.object({
+      id: z.number(),
+      reason: z.string(),
+    })
+
+    const result = schema.safeParse(params)
+
+    if (!result.success) {
+      throw new BadRequestException('Validation error!', result.error.issues)
+    }
+
+    const { id, reason } = params
+
+    await this.patientUseCase.cancelAnAppointment({
+      id,
+      reason,
+    })
   }
 
   async findDoctorsByFilter(
