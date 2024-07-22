@@ -14,7 +14,13 @@ export interface IMakeAnAppointmentParams {
   time: string
 }
 
+export interface ICancelAnAppointmentParams {
+  id: number
+  reason: string
+}
+
 export interface Patient {
   findDoctorsByFilter(params: IFindDoctorsByFilterParams): Promise<DoctorDTO[]>
   makeAnAppointment(params: IMakeAnAppointmentParams): Promise<AppointmentDTO>
+  cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void>
 }

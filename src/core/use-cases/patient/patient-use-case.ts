@@ -2,13 +2,14 @@ import { AppointmentRepository } from '../../../adapters/gateways/repositories/a
 import { DoctorRepository } from '../../../adapters/gateways/repositories/doctor-repository'
 import { PatientRepository } from '../../../adapters/gateways/repositories/patient-repository'
 import {
+  ICancelAnAppointmentParams,
   IMakeAnAppointmentParams,
   PatientUseCase,
 } from '../../../adapters/gateways/use-cases/patient-use-case'
 import { Appointment } from '../../../base/dao/appointment'
 import { Availability } from '../../../base/dto/doctor'
 import { AppointmentEntity } from '../../entities/appointment'
-import { DaysOfWeek, DaysOfWeekNumber } from '../../entities/enums/days-of-week'
+import { DaysOfWeekNumber } from '../../entities/enums/days-of-week'
 import { NotFoundException } from '../../entities/exceptions'
 
 export class PatientUseCaseImpl implements PatientUseCase {
@@ -17,6 +18,23 @@ export class PatientUseCaseImpl implements PatientUseCase {
     private readonly doctorRepository: DoctorRepository,
     private readonly appointmentRepository: AppointmentRepository,
   ) {}
+
+  async cancelAnAppointment({
+    id,
+    reason,
+  }: ICancelAnAppointmentParams): Promise<void> {
+    const appointment = await this.appointmentRepository.findById(id)
+
+    if (!appointment) throw new NotFoundException('Appointment not found!')
+
+    if (appointment.status === 'cancelled')
+      throw new NotFoundException('Appointment already cancelled!')
+
+    await this.appointmentRepository.cancel({
+      appointment,
+      reason,
+    })
+  }
 
   async makeAnAppointment({
     doctorId,
