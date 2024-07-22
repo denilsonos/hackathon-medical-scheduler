@@ -12,10 +12,18 @@ export interface ICancelAnAppointmentParams {
   reason: string
 }
 
+export interface IConfirmOrDeclineAnAppointmentParams {
+  id: number
+  reason: string
+  status: 'confirmed' | 'declined'
+}
+
 export interface PatientUseCase {
   makeAnAppointment(
     params: IMakeAnAppointmentParams,
   ): Promise<AppointmentEntity>
-
   cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void>
+  confirmOrDeclineAnAppointment(
+    params: IConfirmOrDeclineAnAppointmentParams,
+  ): Promise<void>
 }

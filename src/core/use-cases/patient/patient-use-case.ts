@@ -3,6 +3,7 @@ import { DoctorRepository } from '../../../adapters/gateways/repositories/doctor
 import { PatientRepository } from '../../../adapters/gateways/repositories/patient-repository'
 import {
   ICancelAnAppointmentParams,
+  IConfirmOrDeclineAnAppointmentParams,
   IMakeAnAppointmentParams,
   PatientUseCase,
 } from '../../../adapters/gateways/use-cases/patient-use-case'
@@ -19,6 +20,28 @@ export class PatientUseCaseImpl implements PatientUseCase {
     private readonly appointmentRepository: AppointmentRepository,
   ) {}
 
+  async confirmOrDeclineAnAppointment({
+    id,
+    reason,
+    status,
+  }: IConfirmOrDeclineAnAppointmentParams): Promise<void> {
+    const appointment = await this.appointmentRepository.findById(id)
+
+    if (!appointment) throw new NotFoundException('Appointment not found!')
+
+    if (appointment.status === status)
+      throw new NotFoundException('Appointment already has this status!')
+
+    if (appointment.status !== 'pending')
+      throw new NotFoundException('Appointment is not pending!')
+
+    await this.appointmentRepository.confirmOrDecline({
+      appointment,
+      reason,
+      status,
+    })
+  }
+
   async cancelAnAppointment({
     id,
     reason,
@@ -29,6 +52,9 @@ export class PatientUseCaseImpl implements PatientUseCase {
 
     if (appointment.status === 'cancelled')
       throw new NotFoundException('Appointment already cancelled!')
+
+    if (appointment.status !== 'pending')
+      throw new NotFoundException('Appointment is not pending!')
 
     await this.appointmentRepository.cancel({
       appointment,
