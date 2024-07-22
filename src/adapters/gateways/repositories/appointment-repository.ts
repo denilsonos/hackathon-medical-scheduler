@@ -10,6 +10,13 @@ export interface ICreateParams {
   status?: 'pending' | 'confirmed' | 'cancelled'
 }
 
+export interface IFindByDateAndTime {
+  doctorId: number
+  date: string
+  time: string
+}
+
 export interface AppointmentRepository {
   create(params: ICreateParams): Promise<Appointment>
+  findByDateAndTime(params: IFindByDateAndTime): Promise<Appointment | null>
 }
