@@ -1,5 +1,6 @@
 import { Availability } from '../../../base/dto/doctor'
 import { DoctorEntity } from '../../../core/entities/doctor'
+import { IConfirmOrDeclineAnAppointmentParams } from '../interfaces/doctor'
 
 export interface DoctorUseCase {
   updateAvailability(
@@ -11,4 +12,7 @@ export interface DoctorUseCase {
     crm?: string,
     rating?: number,
   ): Promise<DoctorEntity[]>
+  confirmOrDeclineAnAppointment(
+    params: IConfirmOrDeclineAnAppointmentParams,
+  ): Promise<void>
 }

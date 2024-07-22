@@ -1,6 +1,5 @@
 import {
   ICancelAnAppointmentParams,
-  IConfirmOrDeclineAnAppointmentParams,
   IFindDoctorsByFilterParams,
   IMakeAnAppointmentParams,
   Patient,
@@ -32,39 +31,14 @@ export class PatientController implements Patient {
 
   constructor(readonly database: DbConnection) {
     this.doctorRepository = new DoctorRepositoryImpl(database)
-    this.doctorUseCase = new DoctorUseCaseImpl(this.doctorRepository)
-
     this.patientRepository = new PatientRepositoryImpl(database)
     this.appointmentRepository = new AppointmentRepositoryImpl(database)
+    this.doctorUseCase = new DoctorUseCaseImpl(this.doctorRepository, this.appointmentRepository)
     this.patientUseCase = new PatientUseCaseImpl(
       this.patientRepository,
       this.doctorRepository,
       this.appointmentRepository,
     )
-  }
-
-  async confirmOrDeclineAnAppointment(
-    params: IConfirmOrDeclineAnAppointmentParams,
-  ): Promise<void> {
-    const schema = z.object({
-      id: z.number(),
-      reason: z.string(),
-      status: z.enum(['confirmed', 'declined']),
-    })
-
-    const result = schema.safeParse(params)
-
-    if (!result.success) {
-      throw new BadRequestException('Validation error!', result.error.issues)
-    }
-
-    const { id, reason, status } = params
-
-    await this.patientUseCase.confirmOrDeclineAnAppointment({
-      id,
-      reason,
-      status,
-    })
   }
 
   async cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void> {

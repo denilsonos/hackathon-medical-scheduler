@@ -19,17 +19,8 @@ export interface ICancelAnAppointmentParams {
   reason: string
 }
 
-export interface IConfirmOrDeclineAnAppointmentParams {
-  id: number
-  reason: string
-  status: 'confirmed' | 'declined'
-}
-
 export interface Patient {
   findDoctorsByFilter(params: IFindDoctorsByFilterParams): Promise<DoctorDTO[]>
   makeAnAppointment(params: IMakeAnAppointmentParams): Promise<AppointmentDTO>
   cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void>
-  confirmOrDeclineAnAppointment(
-    params: IConfirmOrDeclineAnAppointmentParams,
-  ): Promise<void>
 }

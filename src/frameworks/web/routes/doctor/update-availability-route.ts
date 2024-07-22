@@ -3,14 +3,15 @@ import { Exception } from '../../../../core/entities/exceptions'
 import { DbConnectionImpl } from '../../../database/db-connection-impl'
 import { AuthorizationService } from '../../../middlewares/authentication'
 import { DoctorController } from '../../../../adapters/controllers/doctor-controller'
+import { updateAvailabilitySwagger } from '../../swagger'
 
-export const updateAvailability = async (fastify: FastifyInstance) => {
+export const updateAvailabilityRoute = async (fastify: FastifyInstance) => {
   const authorizationService = new AuthorizationService();
   fastify.addHook('preHandler', authorizationService.authenticate);
 
   fastify.put(
     '/doctor/availability',
-    // createItemSwagger(),
+    updateAvailabilitySwagger(),
     async (request: FastifyRequest, reply: FastifyReply) => {
       const dbConn = new DbConnectionImpl()
       const controller = new DoctorController(dbConn);

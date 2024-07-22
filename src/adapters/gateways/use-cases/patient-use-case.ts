@@ -23,7 +23,4 @@ export interface PatientUseCase {
     params: IMakeAnAppointmentParams,
   ): Promise<AppointmentEntity>
   cancelAnAppointment(params: ICancelAnAppointmentParams): Promise<void>
-  confirmOrDeclineAnAppointment(
-    params: IConfirmOrDeclineAnAppointmentParams,
-  ): Promise<void>
 }
