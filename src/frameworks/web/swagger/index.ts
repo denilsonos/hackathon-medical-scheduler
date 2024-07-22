@@ -1003,3 +1003,54 @@ export const confirmOrDeclineAnAppointmentSwagger = () => ({
     },
   },
 })
+
+export const updateAvailabilitySwagger = () => ({
+  schema: {
+    tags: ['Availability'],
+    body: {
+      type: 'object',
+      properties: {
+        doctorId:  { type: 'number' },
+        availability: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              day: { type: 'string' },
+              times: { 
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+               },
+            },
+          },
+        },
+      },
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+        },
+      },
+      400: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+          issues: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                fatal: { type: 'boolean' },
+                message: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+})
