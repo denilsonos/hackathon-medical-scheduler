@@ -25,7 +25,7 @@ O desenvolvimento se deu por meio de Pair programming, onde implementamos as reg
 
 ### Desenho de Arquitetura
 
-![Arquitetura](https://github.com/denilsonos/hackathon-medical-scheduler/blob/feature/adjust-readme/.github/images/arquitetura.png)
+![image](https://github.com/user-attachments/assets/e2f2730c-a9d2-4375-b001-edd0b71445cb)
 
 ## Deploy
 
