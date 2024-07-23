@@ -15,9 +15,9 @@ export const swaggerOptions = {
             description: 'Find more info here'
         },
         tags: [
-            { name: 'Client', description: 'Client\'s endpoints' },
-            { name: 'Item', description: 'Item\'s endpoints' },
-            { name: 'Order', description: 'Order\'s endpoints' }
+            { name: 'Doctor', description: 'Doctor\'s endpoints' },
+            { name: 'Appointment', description: 'Appointment\'s endpoints' },
+            { name: 'Availability', description: 'Availability\'s endpoints' }
         ]
     }
 }

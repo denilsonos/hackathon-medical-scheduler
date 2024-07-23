@@ -10,7 +10,7 @@ export class Server {
   public async start(): Promise<void> {
     console.log('Starting the server...')
     await this.app.init()
-    console.log('Connectiong the database...')
+    console.log('Connecting the database...')
     await this.database.init()
   }
 }
