@@ -26,8 +26,8 @@ export const confirmOrDeclineAnAppointmentRoute = async (
           reason,
           status,
         })
-        .then((appointment) => {
-          return reply.status(200).send(appointment)
+        .then(() => {
+          return reply.status(200).send({ message: `Appointment ${status}` })
         })
         .catch((error) => {
           console.error('*** MAKE AN APPOINTMENT ROUTE ***', error)
