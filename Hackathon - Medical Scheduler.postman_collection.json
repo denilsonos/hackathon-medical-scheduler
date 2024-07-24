@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"reason\": \"PROBLEM\",\n    \"status\": \"declined\"\n}",
+							"raw": "{\n    \"reason\": \"PROBLEM\",\n    \"status\": \"confirmed\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,7 +39,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "123"
+									"value": "5"
 								}
 							]
 						}
@@ -155,7 +155,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"doctorId\": 1,\n    \"patientEmail\": \"john.doe@gmail.com\",\n    \"date\": \"2024-07-29\",\n    \"time\": \"15:00\"\n}",
+							"raw": "{\n    \"doctorId\": 1,\n    \"patientEmail\": \"mary.jane@gmail.com\",\n    \"date\": \"2024-07-29\",\n    \"time\": \"15:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

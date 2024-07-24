@@ -20,8 +20,8 @@ export const cancelAnAppointmentRoute = async (fastify: FastifyInstance) => {
           id: Number(id),
           reason,
         })
-        .then((appointment) => {
-          return reply.status(200).send(appointment)
+        .then(() => {
+          return reply.status(200).send({ message: "Appointment canceled" })
         })
         .catch((error) => {
           console.error('*** MAKE AN APPOINTMENT ROUTE ***', error)
