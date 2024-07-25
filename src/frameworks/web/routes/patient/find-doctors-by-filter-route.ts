@@ -4,8 +4,12 @@ import { findAllByFilterSwagger } from '../../swagger'
 import { DbConnectionImpl } from '../../../database/db-connection-impl'
 import { IFindDoctorsByFilterParams } from '../../../../adapters/gateways/interfaces/patient'
 import { PatientController } from '../../../../adapters/controllers/patient-controller'
+import { AuthorizationService } from '../../../middlewares/authentication'
 
 export const findDoctorsByFilterRoute = async (fastify: FastifyInstance) => {
+  const authorizationService = new AuthorizationService();
+  fastify.addHook('preHandler', authorizationService.authenticate);
+  
   fastify.get(
     '/patient/doctors',
     findAllByFilterSwagger(),

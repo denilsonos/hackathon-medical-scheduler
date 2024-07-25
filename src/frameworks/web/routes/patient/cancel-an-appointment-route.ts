@@ -3,8 +3,12 @@ import { Exception } from '../../../../core/entities/exceptions'
 import { cancelAnAppointmentSwagger } from '../../swagger'
 import { DbConnectionImpl } from '../../../database/db-connection-impl'
 import { PatientController } from '../../../../adapters/controllers/patient-controller'
+import { AuthorizationService } from '../../../middlewares/authentication'
 
 export const cancelAnAppointmentRoute = async (fastify: FastifyInstance) => {
+  const authorizationService = new AuthorizationService();
+  fastify.addHook('preHandler', authorizationService.authenticate);
+  
   fastify.patch(
     '/patient/appointments/:id',
     cancelAnAppointmentSwagger(),
